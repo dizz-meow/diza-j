@@ -1,0 +1,23 @@
+class Solution(object):
+    def calPoints(self, operations):
+        """
+        :type operations: List[str]
+        :rtype: int
+        """
+        stack = []
+        
+        for op in operations:
+            if op == '+':
+                # Record a new score that is the sum of the previous two scores
+                stack.append(stack[-1] + stack[-2])
+            elif op == 'D':
+                # Record a new score that is the double of the previous score
+                stack.append(stack[-1] * 2)
+            elif op == 'C':
+                # Invalidate the previous score, removing it from the record
+                stack.pop()
+            else:
+                # Value is an integer, record a new score
+                stack.append(int(op))
+                
+        return sum(stack)
